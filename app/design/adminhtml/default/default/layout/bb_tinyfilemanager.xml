@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BB_TinyFileManager Layout
+ *
+ * @category   BB
+ * @package    BB_TinyFileManager
+ */
+-->
+<layout>
+    <!-- No special layout needed - TinyFileManager is included directly in the template -->
+</layout>

@@ -1,0 +1,139 @@
+<?php
+/**
+ * BB_TinyFileManager Image Upload Template
+ * Opens TinyFileManager (media/import) in a full-screen popup modal.
+ *
+ * @category    design
+ * @package     default_default
+ */
+
+/** @var BB_TinyFileManager_Block_Adminhtml_System_Convert_Gui_Edit_Tab_Imageupload $this */
+
+$managerUrl = $this->getUrl('adminhtml/tinyfilemanager/imagemanager', array(
+    '_nosid' => true,
+));
+$mediaImportPath = $this->getMediaImportPath();
+?>
+<style>
+    .tfm-img-launch-box {
+        padding: 30px 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+    .tfm-img-launch-box h3 { color: #3d6611; margin-bottom: 10px; }
+    .tfm-img-launch-box p  { color: #555; margin-bottom: 20px; }
+    .tfm-img-launch-btn {
+        display: inline-block;
+        padding: 12px 28px;
+        background: #3d6611;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+    }
+    .tfm-img-launch-btn:hover { background: #2d4e0d; color: #fff; }
+    .tfm-img-info {
+        margin-top: 20px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 12px 20px;
+        text-align: left;
+        display: inline-block;
+        font-size: 12px;
+        color: #555;
+    }
+    .tfm-img-info strong { color: #333; }
+
+    /* Modal overlay */
+    #tfm-img-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.75);
+        z-index: 99999;
+    }
+    #tfm-img-modal-overlay.tfm-open { display: flex; flex-direction: column; }
+    #tfm-img-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #2d4e0d;
+        color: #fff;
+        padding: 8px 16px;
+        flex-shrink: 0;
+    }
+    #tfm-img-modal-header span { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+    #tfm-img-modal-close {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.4);
+        color: #fff;
+        padding: 4px 14px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    #tfm-img-modal-close:hover { background: rgba(255,255,255,0.35); }
+    #tfm-img-modal-frame {
+        flex: 1;
+        border: none;
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<div class="tfm-img-launch-box">
+    <h3><?php echo $this->__('Image File Manager'); ?></h3>
+    <p><?php echo $this->__('Manage product images in the <code>media/import</code> directory. Upload images here before running an import profile that references them.'); ?></p>
+
+    <button type="button" class="tfm-img-launch-btn" onclick="tfmImgOpenModal()">
+        <?php echo $this->__('Open Image Manager'); ?>
+    </button>
+
+    <div class="tfm-img-info">
+        <strong><?php echo $this->__('Image directory:'); ?></strong>
+        <?php echo htmlspecialchars($mediaImportPath); ?>
+    </div>
+</div>
+
+<!-- TinyFileManager image popup modal -->
+<div id="tfm-img-modal-overlay">
+    <div id="tfm-img-modal-header">
+        <span><?php echo $this->__('Image Manager &mdash; media/import'); ?></span>
+        <button type="button" id="tfm-img-modal-close" onclick="tfmImgCloseModal()"><?php echo $this->__('&times; Close'); ?></button>
+    </div>
+    <iframe id="tfm-img-modal-frame" src="" allowfullscreen></iframe>
+</div>
+
+<script type="text/javascript">
+    var tfmImgUrl = '<?php echo $managerUrl; ?>';
+
+    function tfmImgOpenModal() {
+        var overlay = document.getElementById('tfm-img-modal-overlay');
+        var frame   = document.getElementById('tfm-img-modal-frame');
+        if (!frame.src || frame.src === window.location.href) {
+            frame.src = tfmImgUrl;
+        }
+        overlay.className = 'tfm-open';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function tfmImgCloseModal() {
+        document.getElementById('tfm-img-modal-overlay').className = '';
+        document.body.style.overflow = '';
+    }
+
+    // Close on backdrop click
+    document.getElementById('tfm-img-modal-overlay').addEventListener('click', function(e) {
+        if (e.target === this) { tfmImgCloseModal(); }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { tfmImgCloseModal(); }
+    });
+</script>

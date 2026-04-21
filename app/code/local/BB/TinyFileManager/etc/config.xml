@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BB_TinyFileManager Module Configuration
+ *
+ * @category   BB
+ * @package    BB_TinyFileManager
+ */
+-->
+<config>
+    <modules>
+        <BB_TinyFileManager>
+            <version>1.0.0</version>
+        </BB_TinyFileManager>
+    </modules>
+
+    <global>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <system_convert_gui_edit_tabs>BB_TinyFileManager_Block_Adminhtml_System_Convert_Gui_Edit_Tabs</system_convert_gui_edit_tabs>
+                    <system_convert_gui_edit_tab_upload>BB_TinyFileManager_Block_Adminhtml_System_Convert_Gui_Edit_Tab_Upload</system_convert_gui_edit_tab_upload>
+                    <system_convert_profile_run>BB_TinyFileManager_Block_Adminhtml_System_Convert_Profile_Run</system_convert_profile_run>
+                </rewrite>
+            </adminhtml>
+            <bb_tinyfilemanager>
+                <class>BB_TinyFileManager_Block</class>
+            </bb_tinyfilemanager>
+        </blocks>
+        <helpers>
+            <bb_tinyfilemanager>
+                <class>BB_TinyFileManager_Helper</class>
+            </bb_tinyfilemanager>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <BB_TinyFileManager before="Mage_Adminhtml">BB_TinyFileManager_Adminhtml</BB_TinyFileManager>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <bb_tinyfilemanager>
+                    <file>bb_tinyfilemanager.xml</file>
+                </bb_tinyfilemanager>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BB_TinyFileManager Module Declaration
+ *
+ * @category   BB
+ * @package    BB_TinyFileManager
+ */
+-->
+<config>
+    <modules>
+        <BB_TinyFileManager>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Adminhtml/>
+            </depends>
+        </BB_TinyFileManager>
+    </modules>
+</config>
