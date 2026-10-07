@@ -311,7 +311,7 @@ class BB_TinyFileManager_Adminhtml_TinyfilemanagerController extends Mage_Adminh
      *
      * @return bool
      */
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return Mage::getSingleton('admin/session')->isAllowed('system/convert');
     }
